@@ -22,7 +22,6 @@ async def get_items_from_local_or_remote(*args: int) -> List[Item]:
             failed_items.append(result)
 
     if failed_items:
-        print("THE FOLLOWING ITEMS FAILED: ", failed_items)
         remote_getter = PublicDbGetter()
         remote_results = await remote_getter.get(
             *[i.id for i in failed_items],
@@ -35,9 +34,9 @@ async def get_items_from_local_or_remote(*args: int) -> List[Item]:
     return items
 
 
-def count_gs(*args: Item) -> float:
+def count_gs(*args: Item) -> int:
     _gs = 0
     for item in args:
-        _gs += item.gs
+        _gs += int(item.gs)
 
     return _gs
