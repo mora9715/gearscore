@@ -4,7 +4,7 @@ readme = open("README.md").read()
 
 setuptools.setup(
     name="gear_score",
-    version="0.0.2",
+    version="0.0.3",
     author="Eugene Prodan",
     author_email="mora9715@gmail.com",
     description="Python implementation of GearScore WoW addon",

@@ -27,11 +27,6 @@ class Item(BaseModel):
         setattr(self, "gs", gs)
 
     def _count_gs(self):
-        # print("ITEM LEVEL: ", self._level)
-        # print("SUBTRAHEND: ", self._gs_scale[self._rarity]["subtrahend"])
-        # print("DIVISOR: ", self._gs_scale[self._rarity]["divisor"])
-        # print("SLOT MODIFIER: ", self._slot_coefficient)
-        # print("SCALE: ", self._quality_coefficient)
         gear_score = (
             (self._level - self._gs_scale[self._rarity]["subtrahend"])
             / self._gs_scale[self._rarity]["divisor"]
@@ -109,3 +104,15 @@ class DbItem(SqliteBase):
     rarity = Column(Integer)
     slot = Column(Integer)
     gs = Column(Integer)
+
+"""
+CREATE TABLE `item` (
+	`id` INT NOT NULL,
+	`level` INT NOT NULL,
+	`rarity` INT NOT NULL,
+	`slot` INT NOT NULL,
+	`gs` INT NOT NULL,
+	`name` CHAR NOT NULL,
+	PRIMARY KEY (`id`)
+);
+"""

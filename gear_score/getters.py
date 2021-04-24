@@ -25,7 +25,7 @@ class BaseGetter(ABC):
 class PublicDbGetter(BaseGetter):
     """Interface to get item info from public DB"""
     # TODO: add logging
-    public_db_url = settings.public_db_url
+    public_db_hosts = settings.public_db_hosts
 
     def __init__(self, public_db_url: str = None):
         if public_db_url:
@@ -53,9 +53,15 @@ class PublicDbGetter(BaseGetter):
         }
 
         async with aiohttp.ClientSession() as session:
-            async with session.get(self.public_db_url, params=_request_payload) as resp:
-                public_db_response = await resp.text()
-                response_status = resp.status
+            timeout = aiohttp.ClientTimeout(total=settings.http_request_timeout)
+            for public_db_host in self.public_db_hosts:
+                try:
+                    async with session.get(public_db_host, params=_request_payload, timeout=timeout) as resp:
+                        public_db_response = await resp.text()
+                        response_status = resp.status
+                        break
+                except asyncio.TimeoutError:
+                    pass
 
         if not response_status == 200:
             if raise_exceptions:
