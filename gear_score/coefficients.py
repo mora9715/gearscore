@@ -22,6 +22,7 @@ SLOT_COEFFICIENTS = {
     SlotEnum.tabard: 0,
     SlotEnum.main_hand: 1,
     SlotEnum.off_hand: 1,
+    SlotEnum.left_hand: 1,
     SlotEnum.ammunition: 0,
     SlotEnum.relics: 0.3164
 }

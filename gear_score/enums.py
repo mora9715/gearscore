@@ -35,5 +35,6 @@ class SlotEnum(IntEnum):
     tabard = 19
     main_hand = 21
     off_hand = 22
+    left_hand = 23
     ammunition = 24
     relics = 28
